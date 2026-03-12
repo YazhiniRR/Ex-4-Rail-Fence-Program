@@ -19,7 +19,68 @@ STEP-4: Arrange the characters of the keyword in sorted order and the correspond
 STEP-5: Read the characters row wise or column wise in the former order to get the cipher text.
 
 # PROGRAM
+```
+#include <stdio.h>
+#include <string.h>
 
+int main()
+{
+    int i, j, k, l;
+    char a[20], c[20], d[20];
+
+    printf("\n\t\tRAIL FENCE TECHNIQUE\n");
+
+    // Input string safely
+    printf("\nEnter the input string: ");
+    fgets(a, sizeof(a), stdin);
+
+    // Remove newline if present
+    a[strcspn(a, "\n")] = '\0';
+
+    l = strlen(a); // Length of string
+
+    // Encryption: first even indices, then odd
+    for (i = 0, j = 0; i < l; i++)
+    {
+        if (i % 2 == 0)
+        {
+            c[j++] = a[i];
+        }
+    }
+    for (i = 0; i < l; i++)
+    {
+        if (i % 2 == 1)
+        {
+            c[j++] = a[i];
+        }
+    }
+    c[j] = '\0'; // Null terminate
+
+    printf("\nCipher text after applying rail fence: %s\n", c);
+
+    // Decryption
+    if (l % 2 == 0)
+        k = l / 2;
+    else
+        k = (l / 2) + 1;
+
+    for (i = 0, j = 0; i < k; i++, j += 2)
+    {
+        d[j] = c[i];
+    }
+    for (i = k, j = 1; i < l; i++, j += 2)
+    {
+        d[j] = c[i];
+    }
+    d[l] = '\0';
+
+    printf("\nText after decryption: %s\n", d);
+
+    return 0;
+}
+```
 # OUTPUT
+<img width="532" height="387" alt="image" src="https://github.com/user-attachments/assets/88d54cab-5cd4-4807-a9d8-08b992fdf2b3" />
 
 # RESULT
+Thus the program executed successfully.
